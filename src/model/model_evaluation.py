@@ -27,7 +27,7 @@ metrics_dict = {
     'precision': precision
 }
 
-with open('metrics.json', 'w') as file:
+with open('reports/metrics.json', 'w') as file:
     json.dump(metrics_dict, file, indent=4)
 # basically we dumping the metrics_dict we created into a json file with filename as 'metrics.json'
 
