@@ -44,21 +44,21 @@ stages:
       nfiles: 2
     - path: src/model/model_building.py
       hash: md5
-      md5: f4686675767a8fc16b708b451b19c6f6
-      size: 1074
+      md5: 5c8f6d1137840f73ce488e4f4420b675
+      size: 1081
     params:
       params.yaml:
         model_building.max_iter: 400
         model_building.penalty: l2
     outs:
-    - path: model.pkl
+    - path: models/model.pkl
       hash: md5
       md5: 4a0a65a67b1a50bdaf08adf1e3a4e9b1
       size: 836
   model_evaluation:
     cmd: python src/model/model_evaluation.py
     deps:
-    - path: model.pkl
+    - path: models/model.pkl
       hash: md5
       md5: 4a0a65a67b1a50bdaf08adf1e3a4e9b1
       size: 836
