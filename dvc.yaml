@@ -37,12 +37,12 @@ stages:
     - model_building.max_iter  # here model_building refers to the variable in params.yaml file 
     - model_building.penalty
     outs:
-    - model.pkl
+    - models/model.pkl
     # dvc stage add -n model_evaluation -d src/model_evaluation.py -d model.pkl --metrics metrics.json python src/model_evaluation.py
   model_evaluation:
     cmd: python src/model/model_evaluation.py
     deps:
-    - model.pkl
+    - models/model.pkl
     - src/model/model_evaluation.py
     metrics:
     - metrics.json
