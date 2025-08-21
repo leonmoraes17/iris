@@ -21,7 +21,7 @@ clf = LogisticRegression(max_iter=max_iter, penalty= penalty)
 clf.fit( X_train, y_train)
 
 #save the model
-pickle.dump(clf, open('model.pkl', 'wb'))
+pickle.dump(clf, open('models/model.pkl', 'wb'))
 
 #now add to the dvc stage
 #dvc stage add -n model_building -d src/model_building.py -d data/processed -o model.pkl python src/model_building.py
