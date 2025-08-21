@@ -10,7 +10,7 @@ import yaml
 test_size = yaml.safe_load(open('params.yaml', 'r'))['data_ingestion']['test_size'] #how to connect the params.yaml file which has 
 # data_ingestion stage so that we can tweak the test_size in params.yaml and it automatically gets udpated here
 
-df = pd.read_csv('D:/Projects/iris_project/irisdataset.csv')
+df = pd.read_csv('../iris/irisdataset.csv')
 df = df.rename(columns={"sepal length (cm)": "sepal_length", "sepal width (cm)": "sepal_width","petal length (cm)": 'petal_length',"petal width (cm)": "petal_width" })
 
 # X = df.drop(columns=['target'])
