@@ -1,0 +1,29 @@
+data_ingestion: # this is the name of stage not the name of the file
+  test_size: 0.30
+
+model_building:
+  max_iter: 400
+  penalty: 'l2'
+
+
+
+  # go to the python file of data_ingestion.py
+#   import yaml
+#   test_size = yaml.safe_load(open('params.yaml', 'r'))['data_ingestion']['test_size'] # The value from param.yaml file will be fed to variable test_size 
+# Above Shows how to connect the params.yaml file which has # data_ingestion stage so that we can tweak the test_size in params.yaml and it automatically gets udpated in data_ingestion.py
+
+# now go to Dvc.yaml file and in the data_ingestion stage add 'params' sub stage to it. 
+# stages:
+#   data_ingestion:
+#     cmd: python src/data_ingestion.py
+#     deps:
+#     - src/data_ingestion.py
+#     params:   #Sub Satged added
+#     - data_ingestion.test_size
+#     outs:
+#     - data/raw
+
+#Steps for setting up Params.yaml
+# open param.yaml file and enter the stages (eg model_building stage, stage name will be obtained from dvc.yaml)
+# Then go to the model_building.py file and read the params file through safe_load function and connect the value to a variable and the variable will be put in place where the numbers need to be tweaked
+# Then go to DVC.yaml file and enter the params substage.(see above)

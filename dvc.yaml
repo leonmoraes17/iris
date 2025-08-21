@@ -1,0 +1,48 @@
+#git init then dvc init
+
+# dvc stage add -n data_ingestion -d src/data_ingestion.py -o data/raw python src/data_ingestion.py RUN THIS COMMAND FROM MAIN FOLDER PATH 
+#  -n data_ingestion = - n is the name of the stage and normally its named after the python file that needs to be executed in cmd step on next line
+
+# -d = dependencies needed to execute the cmd stage
+# -o what is the output of the python file 
+
+stages:
+  data_ingestion:
+    cmd: python src/data_ingestion.py
+    deps:
+    - src/data_ingestion.py
+    params:
+    - data_ingestion.test_size
+    outs:
+    - data/raw
+    #  now once preprocessing is done, add the stage so that the below command is auto generated in this yaml file for this stage and then we 
+  # THEN WE CAN run dvc repro
+    #  dvc stage add -n data_preprocessing -d src/data_preprocessing.py -d data/raw -o data/processed python src/data_preprocessing.py
+
+  data_preprocessing:
+    cmd: python src/data_preprocessing.py
+    deps:
+    - data/raw  # train and test csv files acts as input 
+    - src/data_preprocessing.py
+    outs:
+    - data/processed
+
+# dvc dag will now show connection between two stages with 3 * : ***
+  model_building:
+    cmd: python src/model_building.py
+    deps:
+    - data/processed
+    - src/model_building.py
+    params:
+    - model_building.max_iter  # here model_building refers to the variable in params.yaml file 
+    - model_building.penalty
+    outs:
+    - model.pkl
+    # dvc stage add -n model_evaluation -d src/model_evaluation.py -d model.pkl --metrics metrics.json python src/model_evaluation.py
+  model_evaluation:
+    cmd: python src/model_evaluation.py
+    deps:
+    - model.pkl
+    - src/model_evaluation.py
+    metrics:
+    - metrics.json
