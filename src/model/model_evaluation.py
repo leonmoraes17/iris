@@ -6,7 +6,7 @@ import pickle
 from sklearn.metrics import accuracy_score, precision_score
 
 #load model
-clf = pickle.load(open('model.pkl','rb'))
+clf = pickle.load(open('models/model.pkl','rb'))
 
 #load test data
 test_data = pd.read_csv('./data/processed/test_processed.csv')
